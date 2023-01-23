@@ -1,0 +1,46 @@
+SELECT * FROM hp_analytics.hr_statistics;
+
+##YOU WILL GET ALL HIRED LIST(0)
+
+SELECT event_name, Status, COUNT(*) as num_hires 
+FROM hp_analytics.hr_statistics
+WHERE Status IN ('Hired')
+GROUP BY event_name,Status;
+
+## THIS QUERY LEAD TO ONLY SHOW MALE AND FEMALE STATUS OF HIRED (1)
+##Hiring: Process of intaking of people into an organization for different kinds of positions.
+##Your task: How many males and females are Hired ?
+SELECT event_name, COUNT(*) as num_hired FROM hp_analytics.hr_statistics 
+WHERE Status = 'Hired' AND event_name IN ('Male', 'Female') GROUP BY event_name;
+
+##Average Salary: Adding all the salaries for a select group of employees and then dividing the sum by the number of employees in the group.
+##Your task: What is the average salary offered in this company ?
+
+SELECT avg(offered_salary)
+ FROM hp_analytics.hr_statistics 
+
+##Class Intervals: The class interval is the difference between the upper class limit and the lower class limit.
+##Your task: Draw the class intervals for salary in the company ?
+ 
+SELECT MIN(offered_salary) as min_salary, MAX(offered_salary) as max_salary 
+FROM hp_analytics.hr_statistics;
+
+SELECT  COUNT(*) as Count_offered_Salary,
+    CASE 
+        WHEN offered_salary BETWEEN 100 AND 79999 THEN '100 - 79999'
+        WHEN offered_salary BETWEEN 80000 AND 159999 THEN '80000 - 159999'
+        WHEN offered_salary BETWEEN 160000 AND 239000 THEN '160000 - 239000'
+        WHEN offered_salary BETWEEN 240000 AND 319999 THEN '240000 - 319999'
+        WHEN offered_salary BETWEEN 320000 AND 400000 THEN '320000 - 400000'
+    END as salary_range
+FROM hp_analytics.hr_statistics
+GROUP BY salary_range;
+
+
+SELECT post_name,Status, COUNT(*) as num_employees
+FROM hp_analytics.hr_statistics 
+WHERE Status IN ('Hired')
+GROUP BY post_name,Status;
+
+##REFFER THE EXCEL FILE ALSO FOR GRAPHS
+
